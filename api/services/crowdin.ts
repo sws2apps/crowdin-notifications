@@ -70,10 +70,13 @@ export const crowdinGetLanguageStrings = async ({
 
     let languageDate = '';
 
-    for await (const data of Object.values(translatable)) {
-      const value = data as unknown as LanguageText;
+    for await (const [, data] of translatable) {
+      const value = data as LanguageText;
 
-      const approvalResult = await client.listTranslationApprovals(projectId, { stringId: value.id, languageId });
+      const approvalResult = await client.listTranslationApprovals(projectId, {
+        stringId: value.id,
+        languageId: languageId,
+      });
 
       if (approvalResult.data.length > 0) {
         const translationId = approvalResult.data.at(0)!.data.translationId;
