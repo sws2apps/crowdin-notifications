@@ -1,0 +1,4 @@
+{
+    "outputDirectory": "api",
+	"rewrites": [{ "source": "/", "destination": "/api/" }]
+}
