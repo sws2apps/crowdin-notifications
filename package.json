@@ -14,9 +14,13 @@
   "author": "sws2apps",
   "license": "MIT",
   "dependencies": {
-    "next-api-handler": "^0.4.10"
+    "@crowdin/crowdin-api-client": "^1.35.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "eslint": "^9.9.1",
     "typescript": "^5.5.4",
     "vercel": "^37.1.2"

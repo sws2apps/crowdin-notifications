@@ -1,16 +1,58 @@
-import { RouterBuilder } from 'next-api-handler';
+import 'dotenv/config';
+import express from 'express';
 
-const router = new RouterBuilder();
+import { Credentials, ProjectsGroups, SourceStrings, StringTranslations } from '@crowdin/crowdin-api-client';
+import { crowdinGetLanguageStrings, crowdinGetSourcesStrings } from './services/crowdin.js';
 
-router.get(async (req, res) => {
+const app = express();
+
+app.get('/:language', async (req, res) => {
   try {
-    const language = req.query.language?.toString().toUpperCase() || 'E';
+    const token = process.env.CROWDIN_API_KEY;
+    const projectId = process.env.CROWDIN_PROJECT_ID;
+    const fileId = process.env.CROWDIN_FILE_ID;
 
-    res.status(200).json({ language });
+    if (!token || !projectId || !fileId) {
+      return res.status(400).json({ message: 'MISSING_VARIABLES' });
+    }
+
+    const credentials: Credentials = { token };
+
+    const projectsGroupsApi = new ProjectsGroups(credentials, {
+      httpClientType: 'fetch',
+    });
+
+    const projectData = await projectsGroupsApi.getProject(+projectId);
+    const sourceLanguage = projectData.data.sourceLanguage.id;
+
+    const sourceStringsApi = new SourceStrings(credentials);
+    let strings = await crowdinGetSourcesStrings({
+      client: sourceStringsApi,
+      projectId: +projectId,
+      fileId: +fileId,
+    });
+
+    const language = req.params.language;
+
+    if (language === sourceLanguage) {
+      return res.status(200).json(strings);
+    }
+
+    const stringTranslationsApi = new StringTranslations(credentials);
+
+    strings = await crowdinGetLanguageStrings({
+      client: stringTranslationsApi,
+      sources: strings,
+      languages: projectData.data.targetLanguages,
+      language: language,
+      projectId: +projectId,
+    });
+
+    return res.status(200).json(strings);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
 
-export default router.build();
+export default app;

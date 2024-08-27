@@ -1,7 +1,9 @@
-import { RouterBuilder } from 'next-api-handler';
+import express from 'express';
 
-const router = new RouterBuilder();
+const app = express();
 
-router.get((req, res) => res.status(200).json({ message: 'Welcome to Crowdin Notifications API' }));
+app.get('/', async (req, res) => {
+  res.status(200).json({ message: 'Welcome to Crowdin Notifications API' });
+});
 
-export default router.build();
+export default app;
