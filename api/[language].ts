@@ -3,6 +3,7 @@ import express from 'express';
 
 import { Credentials, ProjectsGroups, SourceStrings, StringTranslations } from '@crowdin/crowdin-api-client';
 import { crowdinGetLanguageStrings, crowdinGetSourcesStrings } from './services/crowdin.js';
+import { cleanUpFinalResponse } from './services/api.js';
 
 const app = express();
 
@@ -35,7 +36,9 @@ app.get('/:language', async (req, res) => {
     const language = req.params.language;
 
     if (language === sourceLanguage) {
-      return res.status(200).json(strings);
+      const response = cleanUpFinalResponse(strings);
+
+      return res.status(200).json(response);
     }
 
     const stringTranslationsApi = new StringTranslations(credentials);
@@ -48,7 +51,8 @@ app.get('/:language', async (req, res) => {
       projectId: +projectId,
     });
 
-    return res.status(200).json(strings);
+    const response = cleanUpFinalResponse(strings);
+    return res.status(200).json(response);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });

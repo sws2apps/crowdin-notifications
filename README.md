@@ -1,10 +1,10 @@
 # Crowdin Notifications API
 
-The Crowdin Notifications API is a standalone serverless function we are using to provide notification features to the (https://github.com/sws2apps/organized-app)[Organized app]. So if you see that it could also help you with your use case, here’s how it works.
+The Crowdin Notifications API is a standalone serverless function we are using to provide notification features to the [Organized app](https://github.com/sws2apps/organized-app). So if you see that it could also help you with your use case, here’s how it works.
 
 ## Step 1: Setup Crowdin project
 
-- Create a project on Crowdin.
+- Create a project on [Crowdin](https://crowdin.com).
 
   > Please note it should not be necessary to create a new project if you already have one.
 
@@ -50,25 +50,13 @@ Deploy the API in any platform that supports serverlesss once everything is read
   [
     {
       "updatedAt": "2024-08-27T14:29:17.000Z",
-      "title": {
-        "id": 45738,
-        "text": "Test title 1"
-      },
-      "body": {
-        "id": 45740,
-        "text": "Body test 1"
-      }
+      "title": "Test title 1",
+      "body": "Body test 1"
     },
     {
       "updatedAt": "2024-08-27T14:29:28.000Z",
-      "title": {
-        "id": 45742,
-        "text": "Test title 2"
-      },
-      "body": {
-        "id": 45744,
-        "text": "Body test 2"
-      }
+      "title": "Test title 2",
+      "body": "Body test 2"
     }
   ]
   ```
