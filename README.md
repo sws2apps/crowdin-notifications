@@ -4,9 +4,8 @@ The Crowdin Notifications API is a standalone serverless function we are using t
 
 ## Step 1: Setup Crowdin project
 
-- Create a project on Crowdin
+- Create a project on Crowdin.
 
-  > [!NOTE]
   > Please note it should not be necessary to create a new project if you already have one.
 
 - Create an access token token for Crowdin. These are the only required scopes for the token:
@@ -38,7 +37,6 @@ Deploy the API in any platform that supports serverlesss once everything is read
 - Create source identifier of this format in Crowdin: `YYYYMMDD-XX-title` (eg: `20240827-01-title`).
 - Create the corresponding body text of this format: `YYYYMMDD-XX-body` (eg: `20240827-01-body`).
 
-  > [!WARNING]
   > The two corresponding keys must exist before the API can pick it
 
 - If necessary, provide the needed translations for any languages your applications or services support.
