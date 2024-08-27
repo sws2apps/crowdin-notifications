@@ -2,13 +2,24 @@ name: Vercel Production Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions: read-all
+
 jobs:
-  Deploy-Production:
+  deploy-prod:
+    name: Vercel deployment
     runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
 
