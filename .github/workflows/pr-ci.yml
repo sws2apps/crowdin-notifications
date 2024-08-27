@@ -1,8 +1,6 @@
 name: Lint Check
 
-on:
-  pull_request:
-    branches: [main-e2e]
+on: [pull_request]
 
 permissions: read-all
 
