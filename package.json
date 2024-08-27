@@ -9,12 +9,14 @@
     "npm": ">=10"
   },
   "scripts": {
-    "start": "vercel dev"
+    "start": "vercel dev",
+    "build": "rimraf api && tsc"
   },
   "author": "sws2apps",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^9.9.1",
+    "rimraf": "^6.0.1",
     "tsx": "^4.19.0",
     "typescript": "^5.5.4",
     "vercel": "^37.1.2"

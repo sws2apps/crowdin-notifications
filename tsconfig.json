@@ -6,7 +6,7 @@
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
 		"sourceMap": false,
-		"outDir": "./dist",
+		"outDir": "./api",
 		"strict": true,
 		"skipLibCheck": true,
 		"allowJs": true,
