@@ -9,19 +9,17 @@
     "npm": ">=10"
   },
   "scripts": {
-    "start": "npm run build && vercel dev",
-    "build": "rimraf api && tsc"
+    "start": "vercel dev"
   },
   "author": "sws2apps",
   "license": "MIT",
-  "devDependencies": {
-    "eslint": "^9.9.1",
-    "rimraf": "^6.0.1",
-    "tsx": "^4.19.0",
-    "typescript": "^5.5.4",
-    "vercel": "^37.1.2"
-  },
   "dependencies": {
     "next-api-handler": "^0.4.10"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.0",
+    "eslint": "^9.9.1",
+    "typescript": "^5.5.4",
+    "vercel": "^37.1.2"
   }
 }
