@@ -9,7 +9,7 @@
     "npm": ">=10"
   },
   "scripts": {
-    "start": "vercel dev",
+    "start": "npm run build && vercel dev",
     "build": "rimraf api && tsc"
   },
   "author": "sws2apps",
