@@ -1,0 +1,56 @@
+name: Scheduled Code Quality (Prod)
+
+on:
+  schedule:
+    - cron: '0 12 * * 4'
+
+permissions: read-all
+
+jobs:
+  codeql:
+    name: Code QL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository for code analysis
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        with:
+          ref: main
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@2c779ab0d087cd7fe7b826087247c2c81f27bfa6
+        with:
+          languages: javascript
+          queries: security-extended
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@2c779ab0d087cd7fe7b826087247c2c81f27bfa6
+
+  nodejsscan:
+    name: NodeJS Scan
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+        with:
+          ref: prod
+
+      - name: nodejsscan scan
+        id: njsscan
+        uses: ajinabraham/njsscan-action@d58d8b2f26322cd35a9efb8003baac517f226d81
+        with:
+          args: '. --sarif --output results.sarif || true'
+
+      - name: Upload njsscan report
+        uses: github/codeql-action/upload-sarif@2c779ab0d087cd7fe7b826087247c2c81f27bfa6
+        with:
+          sarif_file: results.sarif
