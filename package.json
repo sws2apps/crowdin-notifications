@@ -1,0 +1,25 @@
+{
+  "name": "organized-notifications",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "author": "sws2apps",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^9.9.1",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4",
+    "vercel": "^37.1.2"
+  },
+  "dependencies": {
+    "next-api-handler": "^0.4.10"
+  }
+}
