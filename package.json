@@ -21,7 +21,7 @@
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.1",
+    "@eslint/js": "^9.10.0",
     "@types/express": "^4.17.21",
     "eslint": "^9.9.1",
     "globals": "^15.9.0",
