@@ -15,7 +15,7 @@
   "author": "sws2apps",
   "license": "MIT",
   "dependencies": {
-    "@crowdin/crowdin-api-client": "^1.37.1",
+    "@crowdin/crowdin-api-client": "^1.38.0",
     "dotenv": "^16.4.5",
     "express": "^5.0.1",
     "node-fetch": "^3.3.2"
