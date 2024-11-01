@@ -9,12 +9,15 @@ const app = express();
 
 app.get('/:language', async (req, res) => {
   try {
+    const { language } = req.params;
+
     const token = process.env.CROWDIN_API_KEY;
     const projectId = process.env.CROWDIN_PROJECT_ID;
     const fileId = process.env.CROWDIN_FILE_ID;
 
     if (!token || !projectId || !fileId) {
-      return res.status(400).json({ message: 'MISSING_VARIABLES' });
+      res.status(400).json({ message: 'MISSING_VARIABLES' });
+      return;
     }
 
     const credentials: Credentials = { token };
@@ -33,12 +36,11 @@ app.get('/:language', async (req, res) => {
       fileId: +fileId,
     });
 
-    const language = req.params.language;
-
     if (language === sourceLanguage) {
       const response = cleanUpFinalResponse(strings);
 
-      return res.status(200).json(response);
+      res.status(200).json(response);
+      return;
     }
 
     const stringTranslationsApi = new StringTranslations(credentials);
@@ -52,7 +54,7 @@ app.get('/:language', async (req, res) => {
     });
 
     const response = cleanUpFinalResponse(strings);
-    return res.status(200).json(response);
+    res.status(200).json(response);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });

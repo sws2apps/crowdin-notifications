@@ -49,11 +49,13 @@ Deploy the API in any platform that supports serverlesss once everything is read
   ```json
   [
     {
+      "id": 45738,
       "updatedAt": "2024-08-27T14:29:17.000Z",
       "title": "Test title 1",
       "body": "Body test 1"
     },
     {
+      "id": 45744,
       "updatedAt": "2024-08-27T14:29:28.000Z",
       "title": "Test title 2",
       "body": "Body test 2"
