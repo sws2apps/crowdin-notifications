@@ -6,7 +6,7 @@ export const cleanUpFinalResponse = (announcements: AnnouncementItem[]) => {
       id: announcement.title.id,
       updatedAt: announcement.updatedAt,
       title: announcement.title.text,
-      body: announcement.body.text,
+      desc: announcement.body.text,
     };
   });
 };
