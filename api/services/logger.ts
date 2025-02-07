@@ -2,9 +2,10 @@ import { Logtail } from '@logtail/node';
 import { LogLevel } from '../definition/index.js';
 
 const sourceToken = process.env.LOGTAIL_SOURCE_TOKEN;
+const sourceEndpoint = process.env.LOGTAIL_ENDPOINT;
 
-const logger = (level: LogLevel, message: string) => {
-  const logtail = sourceToken ? new Logtail(sourceToken) : undefined;
+const logger = async (level: LogLevel, message: string) => {
+  const logtail = sourceToken && sourceEndpoint ? new Logtail(sourceToken, { endpoint: sourceEndpoint }) : undefined;
 
   if (level === 'info') {
     console.log(message);
