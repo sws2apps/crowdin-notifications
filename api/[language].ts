@@ -25,7 +25,7 @@ app.get('/:language', async (req, res) => {
     const fileId = process.env.CROWDIN_FILE_ID;
 
     if (!token || !projectId || !fileId) {
-      const log = { message: 'MISSING_ENV_VARIABLES', ip: req.clientIp, status: 400 };
+      const log = { message: 'MISSING_ENV_VARIABLES', ip: req.clientIp, status: 400, path: req.originalUrl };
 
       logger('warn', JSON.stringify(log));
 
@@ -52,7 +52,15 @@ app.get('/:language', async (req, res) => {
     if (language === sourceLanguage) {
       const response = cleanUpFinalResponse(strings);
 
-      logger('info', JSON.stringify({ message: 'announcements fetched successfully', ip: req.clientIp, status: 200 }));
+      logger(
+        'info',
+        JSON.stringify({
+          message: 'announcements fetched successfully',
+          ip: req.clientIp,
+          status: 200,
+          path: req.originalUrl,
+        })
+      );
 
       res.status(200).json(response);
       return;
@@ -70,7 +78,15 @@ app.get('/:language', async (req, res) => {
 
     const response = cleanUpFinalResponse(strings);
 
-    logger('info', JSON.stringify({ message: 'announcements fetched successfully', ip: req.clientIp, status: 200 }));
+    logger(
+      'info',
+      JSON.stringify({
+        message: 'announcements fetched successfully',
+        ip: req.clientIp,
+        status: 200,
+        path: req.originalUrl,
+      })
+    );
 
     res.status(200).json(response);
   } catch (err) {
