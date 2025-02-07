@@ -25,11 +25,17 @@ app.get('/:language', async (req, res) => {
     const fileId = process.env.CROWDIN_FILE_ID;
 
     if (!token || !projectId || !fileId) {
-      const log = { message: 'MISSING_ENV_VARIABLES', ip: req.clientIp, status: 400, path: req.originalUrl };
+      const message = 'MISSING_ENV_VARIABLES';
 
-      logger('warn', JSON.stringify(log));
+      logger('warn', message, {
+        api: {
+          client: req.clientIp,
+          status: 400,
+          path: req.originalUrl,
+        },
+      });
 
-      res.status(log.status).json({ message: log.message });
+      res.status(400).json({ message });
       return;
     }
 
@@ -52,15 +58,14 @@ app.get('/:language', async (req, res) => {
     if (language === sourceLanguage) {
       const response = cleanUpFinalResponse(strings);
 
-      logger(
-        'info',
-        JSON.stringify({
-          message: 'announcements fetched successfully',
-          ip: req.clientIp,
+      logger('info', 'announcements fetched succesfully', {
+        api: {
+          client: req.clientIp,
+          language,
           status: 200,
           path: req.originalUrl,
-        })
-      );
+        },
+      });
 
       res.status(200).json(response);
       return;
@@ -78,19 +83,26 @@ app.get('/:language', async (req, res) => {
 
     const response = cleanUpFinalResponse(strings);
 
-    logger(
-      'info',
-      JSON.stringify({
-        message: 'announcements fetched successfully',
-        ip: req.clientIp,
+    logger('info', 'announcements fetched succesfully', {
+      api: {
+        client: req.clientIp,
+        language,
         status: 200,
         path: req.originalUrl,
-      })
-    );
+      },
+    });
 
     res.status(200).json(response);
   } catch (err) {
-    logger('error', JSON.stringify({ message: `An error occured: ${err}`, ip: req.clientIp }));
+    logger('error', 'error occured while fetching', {
+      api: {
+        client: req.clientIp,
+        error: err,
+        status: 500,
+        path: req.originalUrl,
+      },
+    });
+
     res.status(500).json({ message: 'Internal server error' });
   }
 });

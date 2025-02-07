@@ -13,11 +13,16 @@ app.use(requestIp.mw());
 app.use(rateLimit({ windowMs: 1000, max: 20, message: JSON.stringify({ message: 'TOO_MANY_REQUESTS' }) }));
 
 app.get('/', async (req, res) => {
-  const log = { message: 'Welcome to Crowdin Notifications API', ip: req.clientIp, status: 200 };
+  const message = 'crowdin-notifications main route opening';
 
-  logger('info', JSON.stringify(log));
+  logger('info', message, {
+    api: {
+      client: req.clientIp,
+      status: 200,
+    },
+  });
 
-  res.status(log.status).json({ message: log.message });
+  res.status(200).json({ message });
 });
 
 export default app;
