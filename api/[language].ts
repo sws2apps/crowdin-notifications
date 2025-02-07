@@ -10,6 +10,8 @@ import logger from './services/logger.js';
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(requestIp.mw());
 
 app.use(rateLimit({ windowMs: 1000, max: 20, message: JSON.stringify({ message: 'TOO_MANY_REQUESTS' }) }));

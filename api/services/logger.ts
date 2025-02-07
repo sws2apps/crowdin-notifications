@@ -4,19 +4,20 @@ import { LogLevel } from '../definition/index.js';
 const sourceToken = process.env.LOGTAIL_SOURCE_TOKEN;
 
 const logger = (level: LogLevel, message: string) => {
-  if (!sourceToken) return;
-
-  const logtail = new Logtail(sourceToken);
+  const logtail = sourceToken ? new Logtail(sourceToken) : undefined;
 
   if (level === 'info') {
-    logtail.info(message);
+    console.log(message);
+    if (logtail) logtail.info(message);
   } else if (level === 'warn') {
-    logtail.warn(message);
+    console.warn(message);
+    if (logtail) logtail.warn(message);
   } else if (level === 'error') {
-    logtail.error(message);
+    console.error(message);
+    if (logtail) logtail.error(message);
   }
 
-  logtail.flush();
+  if (logtail) logtail.flush();
 };
 
 export default logger;
