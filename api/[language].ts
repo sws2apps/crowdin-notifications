@@ -25,7 +25,7 @@ app.get('/:language', async (req, res) => {
     const fileId = process.env.CROWDIN_FILE_ID;
 
     if (!token || !projectId || !fileId) {
-      const message = 'MISSING_ENV_VARIABLES';
+      const message = `MISSING_ENV_VARIABLES level=warn method=GET path=${req.originalUrl} client=${req.clientIp} status=400`;
 
       logger('warn', message, {
         api: {
@@ -58,7 +58,9 @@ app.get('/:language', async (req, res) => {
     if (language === sourceLanguage) {
       const response = cleanUpFinalResponse(strings);
 
-      logger('info', 'announcements fetched succesfully', {
+      const message = `level=info method=GET path=${req.originalUrl} client=${req.clientIp} status=200 language=${language}`;
+
+      logger('info', message, {
         api: {
           client: req.clientIp,
           language,
@@ -83,7 +85,9 @@ app.get('/:language', async (req, res) => {
 
     const response = cleanUpFinalResponse(strings);
 
-    logger('info', 'announcements fetched succesfully', {
+    const message = `level=info method=GET path=${req.originalUrl} client=${req.clientIp} status=200 language=${language}`;
+
+    logger('info', message, {
       api: {
         client: req.clientIp,
         language,
@@ -94,7 +98,9 @@ app.get('/:language', async (req, res) => {
 
     res.status(200).json(response);
   } catch (err) {
-    logger('error', 'error occured while fetching', {
+    const message = `level=error method=GET path=${req.originalUrl} client=${req.clientIp} status=500`;
+
+    logger('error', message, {
       api: {
         client: req.clientIp,
         error: err,
