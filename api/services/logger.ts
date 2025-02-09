@@ -8,6 +8,8 @@ const sourceEndpoint = process.env.LOGTAIL_ENDPOINT;
 const logger = async (level: LogLevel, message: string, context?: Context) => {
   const logtail = sourceToken && sourceEndpoint ? new Logtail(sourceToken, { endpoint: sourceEndpoint }) : undefined;
 
+  message = message.replace(/\n|\r/g, '');
+
   if (level === 'info') {
     console.log(message);
     if (logtail) logtail.info(message, context);
