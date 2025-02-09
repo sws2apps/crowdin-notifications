@@ -59,7 +59,7 @@ export const crowdinGetLanguageStrings = async ({
 }) => {
   const result: AnnouncementItem[] = [];
 
-  const languageId = languages.find((record) => record.locale === language)?.id;
+  const languageId = languages.find((record) => record.threeLettersCode === language)?.id;
 
   if (!languageId) return sources;
 

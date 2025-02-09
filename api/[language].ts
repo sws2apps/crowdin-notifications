@@ -46,7 +46,7 @@ app.get('/:language', async (req, res) => {
     });
 
     const projectData = await projectsGroupsApi.getProject(+projectId);
-    const sourceLanguage = projectData.data.sourceLanguage.id;
+    const sourceLanguage = projectData.data.sourceLanguage.threeLettersCode;
 
     const sourceStringsApi = new SourceStrings(credentials);
     let strings = await crowdinGetSourcesStrings({

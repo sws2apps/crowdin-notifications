@@ -43,7 +43,7 @@ Deploy the API in any platform that supports serverlesss once everything is read
 
 ## Step 4: Fetch the notifications
 
-- Access your API in this url `${your-api-host}/:language`, where `language` is the Crowding `locale` language you want to fetch.
+- Access your API in this url `${your-api-host}/:language`, where `language` is the Crowding `threLettersCode` language you want to fetch.
 - You will receive a JSON response like the following:
 
   ```json
