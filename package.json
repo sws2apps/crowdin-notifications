@@ -27,7 +27,7 @@
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.13.11",
+    "@types/node": "^22.13.13",
     "@types/request-ip": "^0.0.41",
     "eslint": "^9.22.0",
     "globals": "^16.0.0",
