@@ -7,10 +7,12 @@ export const crowdinGetSourcesStrings = async ({
   client,
   fileId,
   projectId,
+  roles
 }: {
   client: SourceStrings;
   projectId: number;
   fileId: number;
+  roles: string[]
 }) => {
   const stringsData = await client.listProjectStrings(projectId, { fileId });
 
@@ -18,7 +20,11 @@ export const crowdinGetSourcesStrings = async ({
 
   const dataTitle = stringsData.data.filter((record) => record.data.identifier.match(KEY_FORMAT));
 
-  for (const { data: title } of dataTitle) {
+  const sourcesByRole = dataTitle.filter(source => {
+    return source.data.context.split(',').some(role => roles.includes(role))
+  })
+
+  for (const { data: title } of sourcesByRole) {
     const titleDate = new Date(title.updatedAt || title.createdAt);
 
     if (!checkDateDelay(titleDate)) continue;

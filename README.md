@@ -35,6 +35,7 @@ Deploy the API in any platform that supports serverlesss once everything is read
 ## Step 3: Create the strings on Crowdin
 
 - Create source identifier of this format in Crowdin: `YYYYMMDD-XX-title` (eg: `20240827-01-title`).
+- Adjust the context of the title string to include any roles that are valid for the notifications. If it is for every users, then set the context to `public`. Separate multiple roles by a comma.
 - Create the corresponding body text of this format: `YYYYMMDD-XX-body` (eg: `20240827-01-body`).
 
   > The two corresponding keys must exist before the API can pick it
