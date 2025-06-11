@@ -3,7 +3,7 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import requestIp from 'request-ip';
 
-import { check } from 'express-validator';
+import { check, header } from 'express-validator';
 
 import { Credentials, ProjectsGroups, SourceStrings, StringTranslations } from '@crowdin/crowdin-api-client';
 import { crowdinGetLanguageStrings, crowdinGetSourcesStrings } from './services/crowdin.js';
@@ -19,11 +19,11 @@ app.use(express.json());
 
 app.use(rateLimit({ windowMs: 1000, max: 20, message: JSON.stringify({ message: 'TOO_MANY_REQUESTS' }) }));
 
-app.get('/:language', check('language').isString(), check('roles').optional().isArray(), async (req, res) => {
+app.get('/:language', check('language').isString(), header('roles').optional().isArray(), async (req, res) => {
   try {
     const language = req.params?.language ?? 'eng';
     
-    let roles = req.headers?.roles ?? [];
+    let roles = JSON.parse(req.headers.roles as string)
 
     roles = Array.from(new Set([...roles, 'public']))
 
