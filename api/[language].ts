@@ -19,13 +19,13 @@ app.use(express.json());
 
 app.use(rateLimit({ windowMs: 1000, max: 20, message: JSON.stringify({ message: 'TOO_MANY_REQUESTS' }) }));
 
-app.get('/:language', check('language').isString(), header('roles').optional().isArray(), async (req, res) => {
+app.get('/:language', check('language').isString(), header('roles').optional().isString(), async (req, res) => {
   try {
     const language = req.params?.language ?? 'eng';
-    
-    let roles = JSON.parse(req.headers.roles as string)
 
-    roles = Array.from(new Set([...roles, 'public']))
+    let roles = JSON.parse(req.headers.roles as string);
+
+    roles = Array.from(new Set([...roles, 'public']));
 
     const token = process.env.CROWDIN_API_KEY;
     const projectId = process.env.CROWDIN_PROJECT_ID;
@@ -60,7 +60,7 @@ app.get('/:language', check('language').isString(), header('roles').optional().i
       client: sourceStringsApi,
       projectId: +projectId,
       fileId: +fileId,
-      roles
+      roles,
     });
 
     if (language === sourceLanguage) {
