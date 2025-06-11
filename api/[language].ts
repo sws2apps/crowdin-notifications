@@ -23,7 +23,7 @@ app.get('/:language', check('language').isString(), header('roles').optional().i
   try {
     const language = req.params?.language ?? 'eng';
 
-    let roles = JSON.parse(req.headers.roles as string);
+    let roles = req.headers.roles ? (req.headers.roles as string).split(',') : [];
 
     roles = Array.from(new Set([...roles, 'public']));
 
