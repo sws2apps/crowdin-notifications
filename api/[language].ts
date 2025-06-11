@@ -22,7 +22,8 @@ app.use(rateLimit({ windowMs: 1000, max: 20, message: JSON.stringify({ message: 
 app.get('/:language', check('language').isString(), check('roles').optional().isArray(), async (req, res) => {
   try {
     const language = req.params?.language ?? 'eng';
-    let roles = req.params?.roles ?? [];
+    
+    let roles = req.headers?.roles ?? [];
 
     roles = Array.from(new Set([...roles, 'public']))
 
