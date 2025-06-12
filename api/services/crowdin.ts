@@ -3,26 +3,16 @@ import { KEY_FORMAT } from '../constants/index.js';
 import { AnnouncementItem, LanguageText } from '../definition/index.js';
 import { checkDateDelay } from './date.js';
 
-export const crowdinGetSourcesStrings = async ({
-  client,
-  fileId,
-  projectId,
-  roles
-}: {
-  client: SourceStrings;
-  projectId: number;
-  fileId: number;
-  roles: string[]
-}) => {
+export const crowdinGetSourcesStrings = async ({ client, fileId, projectId, roles }: { client: SourceStrings; projectId: number; fileId: number; roles: string[] }) => {
   const stringsData = await client.listProjectStrings(projectId, { fileId });
 
   const result: AnnouncementItem[] = [];
 
   const dataTitle = stringsData.data.filter((record) => record.data.identifier.match(KEY_FORMAT));
 
-  const sourcesByRole = dataTitle.filter(source => {
-    return source.data.context.split(',').some(role => roles.includes(role))
-  })
+  const sourcesByRole = dataTitle.filter((source) => {
+    return roles.includes('admin') || source.data.context.split(',').some((role) => roles.includes(role));
+  });
 
   for (const { data: title } of sourcesByRole) {
     const titleDate = new Date(title.updatedAt || title.createdAt);
