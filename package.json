@@ -18,7 +18,7 @@
     "@crowdin/crowdin-api-client": "^1.45.0",
     "@logtail/node": "^0.5.5",
     "@logtail/types": "^0.5.3",
-    "dotenv": "^16.5.0",
+    "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.1",
     "express-validator": "^7.2.1",
