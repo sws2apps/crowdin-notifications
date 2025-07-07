@@ -15,7 +15,7 @@
   "author": "sws2apps",
   "license": "MIT",
   "dependencies": {
-    "@crowdin/crowdin-api-client": "^1.45.0",
+    "@crowdin/crowdin-api-client": "^1.45.1",
     "@logtail/node": "^0.5.5",
     "@logtail/types": "^0.5.3",
     "dotenv": "^17.0.1",
