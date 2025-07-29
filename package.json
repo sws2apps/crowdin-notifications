@@ -34,6 +34,6 @@
     "globals": "^16.3.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
-    "vercel": "^44.5.5"
+    "vercel": "^44.6.4"
   }
 }
