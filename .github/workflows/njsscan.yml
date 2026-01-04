@@ -8,16 +8,15 @@ on:
   schedule:
     - cron: '0 12 * * 4'
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   nodejsscan:
     name: NodeJS Scan
     runs-on: ubuntu-latest
     permissions:
-      security-events: write
-      actions: read
-      contents: read
+      security-events: write     
 
     steps:
       - name: Checkout the code

@@ -2,17 +2,14 @@ name: Lint Check
 
 on: [pull_request]
 
-permissions: read-all
+permissions:
+  contents: read
 
 jobs:
   cypress-run:
     name: Run linting
     runs-on: ubuntu-latest
-
-    permissions:
-      actions: read
-      contents: read
-
+    
     steps:
       - name: Checkout for linting
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
