@@ -31,7 +31,7 @@
     "@types/node": "^25.0.10",
     "@types/request-ip": "^0.0.41",
     "eslint": "^9.39.2",
-    "globals": "^17.0.0",
+    "globals": "^17.3.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1",
     "vercel": "^50.4.9"
