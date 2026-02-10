@@ -21,3 +21,8 @@ updates:
     commit-message:
       prefix: 'feat(deps)'
       prefix-development: 'build(deps)'
+    groups:
+      eslint:
+        patterns:
+          - 'eslint'
+          - '@eslint/js'
