@@ -33,7 +33,7 @@
     "eslint": "^10.3.0",
     "globals": "^17.5.0",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.1",
+    "typescript-eslint": "^8.59.3",
     "vercel": "^50.26.1"
   }
 }
